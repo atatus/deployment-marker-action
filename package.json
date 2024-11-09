@@ -1,0 +1,22 @@
+{
+  "name": "atatus-deployment-api-action",
+  "version": "1.0.0",
+  "description": "GitHub Action to call an Atatus deployment",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "npx ncc build src/index.ts -o dist --source-map --license licenses.txt",
+    "test": "node dist/index.js",
+    "act-test": "act --container-architecture linux/amd64 -W .github/workflows/test.yml"
+  },
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.0",
+    "@types/node": "^22.9.0",
+    "axios": "^1.7.7",
+    "typescript": "^5.6.3"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.38.2",
+    "ts-node": "^10.9.2"
+  }
+}

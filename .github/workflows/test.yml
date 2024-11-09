@@ -1,0 +1,36 @@
+name: Deploy to Atatus
+
+on:
+  push:
+    branches:
+      - release
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Get Commit Message
+        id: commit_message
+        run: |
+          # Fetch the commit message for the current commit (GITHUB_SHA)
+          COMMIT_MSG=$(git log -1 --pretty=%B $GITHUB_SHA)
+          echo "Commit message: $COMMIT_MSG"
+
+          echo "COMMIT_MESSAGE=$COMMIT_MSG" >> $GITHUB_ENV
+
+      - name: Call External API Action
+        uses: ./
+        with:
+          apiKey: ${{ secrets.ATATUS_API_KEY }}
+          changes: ${{ env.COMMIT_MESSAGE }}
+          revision: ${{ github.run_number }}
+          releaseStage: 'production'
+          projectId: ${{ secrets.ATATUS_PROJECT_ID }}
+          user: ${{ github.actor }}
+
+
+

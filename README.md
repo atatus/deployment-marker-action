@@ -25,34 +25,28 @@ A GitHub Action to add Atatus deployment markers during your release pipeline.
 ### Minimum required fields
 
 ```yaml
-name: Change Tracking Marker
+name: Atatus Deployment Tracker
+
 on:
   push:
-    branches:
-      - main
+    tags:
+      - 'v*.*.*'
 
 jobs:
   atatus:
     runs-on: ubuntu-latest
     name: Atatus
     steps:
-      - name: Get Commit Message
-        id: commit_message
-        run: |
-          # Fetch the commit message for the current commit (GITHUB_SHA)
-          COMMIT_MSG=$(git log -1 --pretty=%B $GITHUB_SHA)
-          echo "Commit message: $COMMIT_MSG"
+      - name: Set Release Version from Tag
+        run: echo "RELEASE_VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
 
-          echo "COMMIT_MESSAGE=$COMMIT_MSG" >> $GITHUB_ENV
-
-      # This step creates a new Change Tracking Marker
       - name: Atatus Application Deployment Marker
-        uses: atatus/deployment-marker-action@v1.0.1
+        uses: atatus/deployment-marker-action@v1.0.2
         with:
           apiKey: ${{ secrets.ATATUS_API_KEY }}
           projectId: ${{ secrets.ATATUS_PROJECT_ID }}
-          revision: ${{ github.run_number }}
+          revision: ${{ env.RELEASE_VERSION || github.run_number }}
           releaseStage: 'production'
-          changes: ${{ env.COMMIT_MESSAGE }}
+          changes: ${{ github.sha }}
           user: ${{ github.actor }}
 ```

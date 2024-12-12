@@ -18,7 +18,7 @@ A GitHub Action to add Atatus deployment markers during your release pipeline.
 ### GitHub secrets
 
 [Github secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets#about-encrypted-secrets) assumed to be set:
-* `ATATUS_API_KEY` - API Key (Type - Appliation Key, Scope - Write)
+* `ATATUS_API_KEY` - API Key (Type - Application Key, Scope - Write)
 * `ATATUS_PROJECT_ID` - A unique identifier for a project
 
 >*There are a number of [default GitHub environment variables](https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables) that are used in these examples as well.*
@@ -47,7 +47,7 @@ jobs:
 
       # This step creates a new Change Tracking Marker
       - name: Atatus Application Deployment Marker
-        uses: atatus/deployment-marker-action@v1.0.0
+        uses: atatus/deployment-marker-action@v1.0.1
         with:
           apiKey: ${{ secrets.ATATUS_API_KEY }}
           projectId: ${{ secrets.ATATUS_PROJECT_ID }}

@@ -1,6 +1,9 @@
 name: 'Atatus Application Deployment Marker'
 author: 'Atatus'
 description: 'Apply a Atatus application deployment marker to an application that is monitored by Atatus.'
+branding:
+  icon: 'upload-cloud'
+  color: 'blue'
 inputs:
   apiKey:
     description: 'Your Atatus API Key.'

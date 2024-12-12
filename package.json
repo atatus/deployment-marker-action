@@ -1,5 +1,5 @@
 {
-  "name": "atatus-deployment-api-action",
+  "name": "atatus-deployment-marker-action",
   "version": "1.0.0",
   "description": "GitHub Action to call an Atatus deployment",
   "main": "dist/index.js",

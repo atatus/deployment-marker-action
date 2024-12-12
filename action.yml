@@ -1,5 +1,6 @@
-name: 'Call External API Action'
-description: 'This action calls an external API using HTTP requests.'
+name: 'Atatus Application Deployment Marker'
+author: 'Atatus'
+description: 'Apply a Atatus application deployment marker to an application that is monitored by Atatus.'
 inputs:
   apiKey:
     description: 'Your Atatus API Key.'
